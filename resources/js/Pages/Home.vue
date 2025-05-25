@@ -64,21 +64,11 @@
 </template>
 
 <script setup>
-import Navbar from '@/Components/Navbar.vue';
-import { ref } from 'vue'
-
-const topPicks = ref([
-  { id: 1, title: 'Orange', artist: '71', cover: '/covers/orange.jpg' },
-  { id: 2, title: 'Stecu', artist: 'Fiersa Afran', cover: '/covers/stecu.jpg' },
-  { id: 3, title: 'Maito', artist: 'Out of Joe', cover: '/covers/maito.jpg' },
-  // Tambah sesuai data kamu
-])
-
-const topArtists = ref([
-  { id: 1, name: 'Bonnie Mars', image: '/artists/bonnie.jpg' },
-  { id: 2, name: 'Juvernal', image: '/artists/juvernal.jpg' },
-  // Tambah sesuai data kamu
-])
+  import Navbar from '@/Components/Navbar.vue';
+  const props = defineProps({
+    topPicks:   Array,
+    topArtists: Array
+  });
 </script>
 
 <style scoped>
