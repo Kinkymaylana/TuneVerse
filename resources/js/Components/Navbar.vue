@@ -3,45 +3,50 @@
     <div class="flex items-center justify-between flex-nowrap w-full">
 
       <!-- KIRI: Logo & Text -->
-      <div class="flex items-center gap-2 flex-shrink-0 cursor-pointer" @click="$router.push('/home')">
+      <Link href="/home" class="flex items-center gap-2 flex-shrink-0 cursor-pointer">
         <img src="/image/logo.png" alt="Logo" class="w-8 h-8" />
         <span class="font-sunshiney text-[20px] text-white">Tune Verse</span>
-      </div>
+      </Link>
 
       <!-- TENGAH: Home + Search + Plus + Profile -->
       <div class="flex items-center gap-2">
         <!-- Icon Home -->
-        <button
+        <Link
+          href="/home"
           class="w-8 h-8 rounded-full bg-[#DBDDF580] flex items-center justify-center hover:opacity-70 transition"
-          @click="$router.push('/home')">
+        >
           <img src="/image/ic_home.png" alt="Home" class="w-4 h-4" />
-        </button>
+        </Link>
 
         <!-- Search Bar -->
-        <div class="flex items-center bg-[#8774B080] px-4 h-8 rounded-full flex-grow min-w-[150px] max-w-md">
+        <form
+          @submit.prevent="handleSearch"
+          class="flex items-center bg-[#8774B080] px-4 h-8 rounded-full flex-grow min-w-[150px] max-w-md"
+        >
           <img src="/image/ic_search.png" alt="Search" class="w-4 h-4 mr-2" />
           <input
             v-model="searchQuery"
-            @keyup.enter="$router.push({ path: '/search', query: { q: searchQuery } })"
             type="text"
             placeholder="Search"
             class="bg-transparent text-white text-sm placeholder-white w-full h-full focus:outline-none border-none"
           />
-        </div>
+        </form>
 
         <!-- Icon Plus -->
-        <button
+        <Link
+          href="/create"
           class="w-8 h-8 rounded-full bg-[#DBDDF580] flex items-center justify-center hover:opacity-70 transition"
-          @click="$router.push('/create')">
+        >
           <img src="/image/ic_plus.png" alt="Add" class="w-4 h-4" />
-        </button>
+        </Link>
 
         <!-- Icon Profile -->
-        <button
+        <Link
+          href="/profile"
           class="w-8 h-8 rounded-full bg-[#DBDDF580] flex items-center justify-center hover:opacity-70 transition"
-          @click="$router.push('/profile')">
+        >
           <img src="/image/ic_profile.png" alt="Profile" class="w-4 h-4" />
-        </button>
+        </Link>
       </div>
 
       <!-- KANAN: Slogan -->
@@ -55,9 +60,17 @@
 
 <script setup>
 import { ref } from 'vue';
+import { router, Link } from '@inertiajs/vue3';
 
-// state untuk search
+// Search state
 const searchQuery = ref('');
+
+// Navigasi via form search
+const handleSearch = () => {
+  if (searchQuery.value.trim() !== '') {
+    router.visit(`/search?q=${encodeURIComponent(searchQuery.value)}`);
+  }
+};
 </script>
 
 <style scoped>

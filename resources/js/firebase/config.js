@@ -1,21 +1,19 @@
 // resources/js/firebase/config.js
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore'; // Jika Anda akan menyimpan data user di Firestore
+import { getFirestore } from 'firebase/firestore';
 
-// TODO: Ganti dengan konfigurasi Firebase Anda
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyB8AgWmuJvPO-UcWf6-LXiV2mZHzq7Hg5c", // Ganti ini kalau sudah kamu generate baru
+  authDomain: "testdb-apps.firebaseapp.com",
+  projectId: "testdb-apps",
+  storageBucket: "testdb-apps.appspot.com",
+  messagingSenderId: "826407458596",
+  appId: "1:826407458596:web:fc7f986cf4a797adb145b1"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app); // Inisialisasi Firestore
+const db = getFirestore(app);
 
 export { auth, db };
