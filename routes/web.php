@@ -39,11 +39,6 @@ Route::get('/lagu/{id}', function ($id) {
     return Inertia::render('LaguDetail', ['id' => $id]);
 });
 
-// Detail artis
-Route::get('/artis/{id}', function ($id) {
-    return Inertia::render('ArtisDetail', ['id' => $id]);
-});
-
 // Halaman tambah lagu
 Route::get('/tambah-lagu', function () {
     return Inertia::render('TambahLagu'); // Pastikan kamu sudah buat file TambahLagu.vue di folder resources/js/Pages atau resources/js/Views (sesuaikan dengan struktur project kamu)
