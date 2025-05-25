@@ -23,6 +23,7 @@
         "@fontsource/inter": "^5.2.5",
         "@fontsource/spicy-rice": "^5.2.5",
         "@fontsource/stalemate": "^5.2.5",
-        "@fontsource/sunshiney": "^5.2.5"
+        "@fontsource/sunshiney": "^5.2.5",
+        "vue-router": "^4.5.1"
     }
 }
