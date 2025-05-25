@@ -1,3 +1,43 @@
+@font-face {
+  font-family: 'Sunshiney';
+  src: url('/fonts/Sunshiney-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Penting untuk kinerja loading font */
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 400; /* Atau sesuai dengan weight font yang Anda gunakan */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SpicyRice';
+  src: url('/fonts/SpicyRice-Regular.ttf') format('truetype');
+  font-weight: normal; /* Atau sesuai dengan weight font yang Anda gunakan */
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Default font aplikasi */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.font-sunshiney {
+  font-family: 'Sunshiney', cursive; /* cursive sebagai fallback */
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif; /* sans-serif sebagai fallback */
+}
+
+.font-spicyrice {
+  font-family: 'SpicyRice', cursive; /* sans-serif sebagai fallback */
+}
