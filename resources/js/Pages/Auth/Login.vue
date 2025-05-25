@@ -11,51 +11,26 @@
 
       <form @submit.prevent="handleLogin" class="space-y-6">
         <div>
-          <label for="email" class="block text-sm font-bold text-[#5B518D] mb-2">E-mail</label>
-          <input
-            id="email"
-            v-model="email"
-            type="email"
-            placeholder="E-mail"
-            required
-            autocomplete="username"
-            class="block w-full px-4 py-3 border border-[#5B518D] rounded-lg placeholder:text-[#8C8C8C]
-                   focus:outline-none focus:ring-2 focus:ring-[#5B518D]"
-          />
+          <label class="block text-sm font-bold text-[#5B518D] mb-1">E-mail</label>
+          <input v-model="email" type="email" required placeholder="E-mail" class="input" />
         </div>
 
         <div>
-          <label for="password" class="block text-sm font-bold text-[#5B518D] mb-2">Password</label>
-          <input
-            id="password"
-            v-model="password"
-            type="password"
-            placeholder="Password"
-            required
-            autocomplete="current-password"
-            class="block w-full px-4 py-3 border border-[#5B518D] rounded-lg placeholder:text-[#8C8C8C]
-                   focus:outline-none focus:ring-2 focus:ring-[#5B518D]"
-          />
+          <label class="block text-sm font-bold text-[#5B518D] mb-1">Password</label>
+          <input v-model="password" type="password" required placeholder="Password" class="input" />
           <div class="text-right mt-1">
             <a href="#" class="text-xs text-[#5B518D] hover:underline">Lupa Password?</a>
           </div>
         </div>
 
-        <button
-          type="submit"
-          class="w-full bg-[#F7B500] text-[#5B518D] font-bold text-lg py-3 rounded-lg
-                 disabled:opacity-50 disabled:cursor-not-allowed transition"
-          :disabled="loading"
-        >
+        <button type="submit" class="btn-submit" :disabled="loading">
           {{ loading ? 'Memuat...' : 'Masuk' }}
         </button>
 
-        <p v-if="error" class="text-center text-sm text-red-600">{{ error }}</p>
-        <p class="text-center text-sm text-[#555]">
+        <p v-if="error" class="text-red-600 text-sm text-center mt-2">{{ error }}</p>
+        <p class="text-center text-sm mt-4">
           Belum punya akun?
-          <Link href="/register" class="text-[#5B518D] font-bold hover:underline">
-            Daftar di sini
-          </Link>
+          <Link href="/register" class="text-[#5B518D] font-bold hover:underline">Daftar di sini</Link>
         </p>
       </form>
     </div>
@@ -79,15 +54,22 @@ export default {
     async handleLogin() {
       this.loading = true;
       this.error = null;
+
       try {
-        const response = await fetch('/api/login', {
+        const res = await fetch('http://localhost:3000/api/auth/login', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: this.email, password: this.password }),
         });
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.message || 'Login gagal');
-        this.$inertia.visit('/dashboard');
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.message || 'Login gagal');
+
+        // Simpan token (optional)
+        localStorage.setItem('token', data.idToken);
+
+        this.$inertia.visit('/home');
       } catch (e) {
         this.error = e.message;
       } finally {
@@ -99,7 +81,19 @@ export default {
 </script>
 
 <style scoped>
-input::placeholder {
-  color: #8C8C8C;
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #5B518D;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.btn-submit {
+  background-color: #F7B500;
+  color: #5B518D;
+  font-weight: bold;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
 }
 </style>

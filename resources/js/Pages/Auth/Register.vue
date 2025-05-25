@@ -11,56 +11,28 @@
 
       <form @submit.prevent="handleRegister" class="space-y-6">
         <div>
-          <label for="email" class="block text-sm font-bold text-[#5B518D] mb-2">E-mail</label>
-          <input
-            id="email"
-            v-model="email"
-            type="email"
-            placeholder="E-mail"
-            required
-            class="block w-full px-4 py-3 border border-[#5B518D] rounded-lg placeholder:text-[#8C8C8C]"
-          />
+          <label class="block text-sm font-bold text-[#5B518D] mb-1">E-mail</label>
+          <input v-model="email" type="email" required placeholder="E-mail" class="input" />
         </div>
 
         <div>
-          <label for="password" class="block text-sm font-bold text-[#5B518D] mb-2">Password</label>
-          <input
-            id="password"
-            v-model="password"
-            type="password"
-            placeholder="Password"
-            required
-            class="block w-full px-4 py-3 border border-[#5B518D] rounded-lg placeholder:text-[#8C8C8C]"
-          />
+          <label class="block text-sm font-bold text-[#5B518D] mb-1">Password</label>
+          <input v-model="password" type="password" required placeholder="Password" class="input" />
         </div>
 
         <div>
-          <label for="username" class="block text-sm font-bold text-[#5B518D] mb-2">Username</label>
-          <input
-            id="username"
-            v-model="username"
-            type="text"
-            placeholder="Username"
-            required
-            class="block w-full px-4 py-3 border border-[#5B518D] rounded-lg placeholder:text-[#8C8C8C]"
-          />
+          <label class="block text-sm font-bold text-[#5B518D] mb-1">Username</label>
+          <input v-model="username" type="text" required placeholder="Username" class="input" />
         </div>
 
-        <button
-          type="submit"
-          class="w-full bg-[#F7B500] text-[#5B518D] font-bold text-lg py-3 rounded-lg
-                 disabled:opacity-50 disabled:cursor-not-allowed transition"
-          :disabled="loading"
-        >
+        <button type="submit" class="btn-submit" :disabled="loading">
           {{ loading ? 'Mendaftar...' : 'Daftar' }}
         </button>
 
-        <p v-if="error" class="text-center text-sm text-red-600">{{ error }}</p>
-        <p class="text-center text-sm text-[#555]">
+        <p v-if="error" class="text-red-600 text-sm text-center mt-2">{{ error }}</p>
+        <p class="text-center text-sm mt-4">
           Sudah punya akun?
-          <Link href="/login" class="text-[#5B518D] font-bold hover:underline">
-            Masuk di sini
-          </Link>
+          <Link href="/login" class="text-[#5B518D] font-bold hover:underline">Masuk di sini</Link>
         </p>
       </form>
     </div>
@@ -85,18 +57,28 @@ export default {
     async handleRegister() {
       this.loading = true;
       this.error = null;
+
       try {
-        const res = await fetch('/api/register', {
+        const res = await fetch('http://localhost:3000/api/auth/register', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email: this.email,
             password: this.password,
             username: this.username,
+            displayName: this.username,
           }),
         });
+
         const data = await res.json();
-        if (!res.ok) throw new Error(data.message || 'Pendaftaran gagal');
+
+        if (!res.ok) {
+          if (data.errors?.length) {
+            throw new Error(data.errors[0].msg);
+          }
+          throw new Error(data.message || 'Pendaftaran gagal');
+        }
+
         this.$inertia.visit('/login');
       } catch (e) {
         this.error = e.message;
@@ -109,7 +91,19 @@ export default {
 </script>
 
 <style scoped>
-input::placeholder {
-  color: #8C8C8C;
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #5B518D;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.btn-submit {
+  background-color: #F7B500;
+  color: #5B518D;
+  font-weight: bold;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
 }
 </style>
