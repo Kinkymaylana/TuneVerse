@@ -1,5 +1,20 @@
+// Import font Inter dengan berbagai varian
+import '@fontsource/inter/300.css';      // Light
+import '@fontsource/inter/400.css';      // Regular
+import '@fontsource/inter/500.css';      // Medium
+import '@fontsource/inter/600.css';         // SemiBold
+import '@fontsource/inter/700.css';         // Bold
+import '@fontsource/inter/400-italic.css';  // Italic
+
+
+// Import font lainnya
+import '@fontsource/sunshiney';
+import '@fontsource/spicy-rice';
+import '@fontsource/stalemate';
+
 import '../css/app.css';
 import './bootstrap';
+
 
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
