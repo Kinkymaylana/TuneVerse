@@ -31,36 +31,14 @@ use Inertia\Inertia;
 
 // Halaman utama menampilkan daftar lagu & artis (sesuai desain beranda TuneVerse)
 Route::get('/home', function () {
-    $topPicks = [
-      ['id'=>1,'title'=>'Orange','artist'=>'Bruno Mars','cover'=>'/covers/orange.jpg'],
-      ['id'=>2,'title'=>'Stecu','artist'=>'Fiersa Afran','cover'=>'/covers/stecu.jpg'],
-      ['id'=>3,'title'=>'Maito','artist'=>'Out of Joe','cover'=>'/covers/maito.jpg'],
-    ];
-
-    $topArtists = [
-      ['id'=>1,'name'=>'Bruno Mars','image'=>'/artists/bruno.jpg'],
-      ['id'=>2,'name'=>'Ariana Grande','image'=>'/artists/ariana.jpg'],
-      // … sesuai Figma
-    ];
-
-    return Inertia::render('Home', [
-      'topPicks'   => $topPicks,
-      'topArtists' => $topArtists,
-    ]);
+    return Inertia::render('Home');
 })->name('home');
 
-// Detail lagu
-Route::get('/lagu/{id}', function ($id) {
-    $song = [
-      'id'     => $id,
-      'title'  => 'Orange',
-      'artist' => 'Bruno Mars',
-      'cover'  => '/covers/orange.jpg',
-      'lyrics' => '…lirik contoh…',
-    ];
-    return Inertia::render('LaguDetail', ['song' => $song]);
-})->name('lagu.detail');
-
+Route::get('/music/{id}', function ($id) {
+    return Inertia::render('LaguDetail', [
+        'id' => $id,    // kirim id ini sebagai prop
+    ]);
+});
 
 // Halaman tambah lagu
 Route::get('/tambah-lagu', function () {

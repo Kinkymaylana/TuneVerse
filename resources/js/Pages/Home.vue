@@ -17,6 +17,7 @@
       </div>
     </section>
 
+
     <!-- Explore Musics -->
     <section class="px-4 md:px-16 py-10 relative overflow-hidden">
       <h2 class="text-[40px] font-sunshiney text-[#301B54]">Explore Musics</h2>
@@ -26,7 +27,8 @@
         </p>
         <button
           class="text-sm font-inter font-semibold text-[#301B54] hover:underline"
-          @click="$router.push('/explore')">
+          @click="$inertia.visit('/explore')"
+        >
           Lihat Semua
         </button>
       </div>
@@ -34,26 +36,35 @@
       <div class="mt-6 relative">
         <div
           ref="carousel"
-          class="scrolling-wrapper flex gap-6 overflow-x-auto no-scrollbar px-1 py-2">
-          <div
+          class="scrolling-wrapper flex gap-6 overflow-x-auto no-scrollbar px-1 py-2"
+        >
+          <Link
             v-for="music in topPicks"
             :key="music.id + '-' + music.dup"
-            class="bg-white rounded-[16px] p-3 shadow-lg text-center w-[150px] shrink-0 cursor-pointer transition-transform hover:scale-105 hover:shadow-2xl">
+            :href="`/music/${music.id}`"
+            class="bg-white rounded-[16px] p-3 shadow-lg text-center w-[150px] shrink-0 cursor-pointer transition-transform hover:scale-105 hover:shadow-2xl"
+          >
             <img
               :src="music.imageUrl"
               alt="cover"
-              class="rounded-[12px] mb-2 w-full h-[150px] object-cover transition-transform duration-200 hover:scale-105" />
+              class="rounded-[12px] mb-2 w-full h-[150px] object-cover transition-transform duration-200 hover:scale-105"
+            />
             <p class="font-inter font-bold text-[16px] text-[#301B54] truncate">{{ music.title }}</p>
             <p class="font-inter font-light text-[14px] text-[#301B54] truncate">{{ music.artist }}</p>
-          </div>
+          </Link>
         </div>
 
         <!-- LEFT BLUR -->
-        <div class="absolute top-0 left-0 h-full w-24 z-10 bg-gradient-to-r from-[#FFF2CD] to-transparent pointer-events-none"></div>
+        <div
+          class="absolute top-0 left-0 h-full w-24 z-10 bg-gradient-to-r from-[#FFF2CD] to-transparent pointer-events-none"
+        ></div>
         <!-- RIGHT BLUR -->
-        <div class="absolute top-0 right-0 h-full w-24 z-10 bg-gradient-to-l from-[#FFF2CD] to-transparent pointer-events-none"></div>
+        <div
+          class="absolute top-0 right-0 h-full w-24 z-10 bg-gradient-to-l from-[#FFF2CD] to-transparent pointer-events-none"
+        ></div>
       </div>
     </section>
+
 
     <!-- Top 10 Artists Section -->
     <section class="px-4 md:px-16 py-10">
@@ -81,6 +92,7 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/inertia-vue3'
 import { ref, onMounted } from 'vue';
 import Navbar from '@/Components/Navbar.vue';
 
