@@ -12,7 +12,7 @@
                 <p class="text-3xl font-stalemate text-black mb-6">{{ penyanyi }}</p>
 
                 <!-- Kontrol Musik -->
-                <div class="bg-[#D9D9D9] rounded-xl px-6 py-4 mt-6 flex flex-col items-center">
+                <div class="bg-[#8774B080] rounded-xl px-6 py-4 mt-6 flex flex-col items-center">
                     <div class="flex items-center justify-center space-x-8 mb-2">
                         <button class="text-black hover:scale-110 transition-transform">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
