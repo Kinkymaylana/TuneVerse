@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // Halaman utama menampilkan daftar lagu & artis (sesuai desain beranda TuneVerse)
-Route::get('/', function () {
+Route::get('/home', function () {
     return Inertia::render('Home'); // Home.vue
 })->name('home');
 
