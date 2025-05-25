@@ -31,16 +31,39 @@ use Inertia\Inertia;
 
 // Halaman utama menampilkan daftar lagu & artis (sesuai desain beranda TuneVerse)
 Route::get('/home', function () {
-    return Inertia::render('Home'); // Home.vue
+    $topPicks = [
+      ['id'=>1,'title'=>'Orange','artist'=>'Bruno Mars','cover'=>'/covers/orange.jpg'],
+      ['id'=>2,'title'=>'Stecu','artist'=>'Fiersa Afran','cover'=>'/covers/stecu.jpg'],
+      ['id'=>3,'title'=>'Maito','artist'=>'Out of Joe','cover'=>'/covers/maito.jpg'],
+    ];
+
+    $topArtists = [
+      ['id'=>1,'name'=>'Bruno Mars','image'=>'/artists/bruno.jpg'],
+      ['id'=>2,'name'=>'Ariana Grande','image'=>'/artists/ariana.jpg'],
+      // … sesuai Figma
+    ];
+
+    return Inertia::render('Home', [
+      'topPicks'   => $topPicks,
+      'topArtists' => $topArtists,
+    ]);
 })->name('home');
 
 // Detail lagu
 Route::get('/lagu/{id}', function ($id) {
-    return Inertia::render('LaguDetail', ['id' => $id]);
-});
+    $song = [
+      'id'     => $id,
+      'title'  => 'Orange',
+      'artist' => 'Bruno Mars',
+      'cover'  => '/covers/orange.jpg',
+      'lyrics' => '…lirik contoh…',
+    ];
+    return Inertia::render('LaguDetail', ['song' => $song]);
+})->name('lagu.detail');
+
 
 // Halaman tambah lagu
 Route::get('/tambah-lagu', function () {
-    return Inertia::render('TambahLagu'); // Pastikan kamu sudah buat file TambahLagu.vue di folder resources/js/Pages atau resources/js/Views (sesuaikan dengan struktur project kamu)
-})->name('tambah-lagu');
+    return Inertia::render('TambahLagu');
+})->name('lagu.create');
 
