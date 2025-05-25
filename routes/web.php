@@ -24,4 +24,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/auth/{any}', function () {
+    return view('auth_vue');
+})->where('any', '.*')->name('vue_auth_entrypoint');
+
+Route::redirect('/', '/auth/login');
+
+Route::get('/dashboard', function () {
+    return view('dashboard'); // Akan mencari resources/views/dashboard.blade.php
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 require __DIR__.'/auth.php';
