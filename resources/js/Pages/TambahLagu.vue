@@ -113,8 +113,13 @@ const submitForm = async () => {
   formData.append('cover', gambarFile.value)
 
   try {
+    const token = localStorage.getItem('token')
+
     const res = await fetch('http://localhost:3000/api/music', {
       method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
       body: formData,
     })
 
@@ -125,16 +130,16 @@ const submitForm = async () => {
     }
 
     successMessage.value = data.message || 'Lagu berhasil disimpan!'
-    // Reset form
-    title.value = ''
-    artist.value = ''
-    laguFile.value = null
-    gambarFile.value = null
-    laguName.value = ''
-    gambarName.value = ''
-    gambarPreview.value = ''
+
+    // Optional: kasih delay biar user lihat pesan sukses sebentar
+    setTimeout(() => {
+      window.location.href = '/home';
+    }, 1500)
+
   } catch (e) {
     errorMessage.value = e.message
   }
 }
+
+
 </script>
