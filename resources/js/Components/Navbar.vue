@@ -2,7 +2,7 @@
   <nav class="bg-[#301B54] border-b-4 border-[#F5C92A] px-4 md:px-6 py-3">
     <div class="flex items-center justify-between flex-nowrap w-full">
 
-      <!-- KIRI: Logo & Text -->
+      <!-- KIRI: Logo & Text (navigasi ke /home) -->
       <Link href="/home" class="flex items-center gap-2 flex-shrink-0 cursor-pointer">
         <img src="/image/logo.png" alt="Logo" class="w-8 h-8" />
         <span class="font-sunshiney text-[20px] text-white">Tune Verse</span>
@@ -32,9 +32,9 @@
           />
         </form>
 
-        <!-- Icon Plus -->
+        <!-- Icon Plus (navigasi ke /music/create) -->
         <Link
-          href="/create"
+          href="/music/create"
           class="w-8 h-8 rounded-full bg-[#DBDDF580] flex items-center justify-center hover:opacity-70 transition"
         >
           <img src="/image/ic_plus.png" alt="Add" class="w-4 h-4" />
@@ -60,12 +60,12 @@
 
 <script setup>
 import { ref } from 'vue';
-import { router, Link } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 
-// Search state
-const searchQuery = ref('');
 
-// Navigasi via form search
+  const searchQuery = ref('');
+
+// Handle form search
 const handleSearch = () => {
   if (searchQuery.value.trim() !== '') {
     router.visit(`/search?q=${encodeURIComponent(searchQuery.value)}`);
