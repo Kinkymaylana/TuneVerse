@@ -2,21 +2,21 @@
   <nav class="bg-[#301B54] border-b-4 border-[#F5C92A] px-4 md:px-6 py-3">
     <div class="flex items-center justify-between flex-nowrap w-full">
 
-      <!-- KIRI: Logo & Text (navigasi ke /home) -->
-      <Link href="/home" class="flex items-center gap-2 flex-shrink-0 cursor-pointer">
+      <!-- KIRI: Logo & Text -->
+      <a href="/home" class="flex items-center gap-2 flex-shrink-0 cursor-pointer">
         <img src="/image/logo.png" alt="Logo" class="w-8 h-8" />
         <span class="font-sunshiney text-[20px] text-white">Tune Verse</span>
-      </Link>
+      </a>
 
       <!-- TENGAH: Home + Search + Plus + Profile -->
       <div class="flex items-center gap-2">
         <!-- Icon Home -->
-        <Link
+        <a
           href="/home"
           class="w-8 h-8 rounded-full bg-[#DBDDF580] flex items-center justify-center hover:opacity-70 transition"
         >
           <img src="/image/ic_home.png" alt="Home" class="w-4 h-4" />
-        </Link>
+        </a>
 
         <!-- Search Bar -->
         <form
@@ -32,21 +32,21 @@
           />
         </form>
 
-        <!-- Icon Plus (navigasi ke /music/create) -->
-        <Link
+        <!-- Icon Plus -->
+        <a
           href="/music/create"
           class="w-8 h-8 rounded-full bg-[#DBDDF580] flex items-center justify-center hover:opacity-70 transition"
         >
           <img src="/image/ic_plus.png" alt="Add" class="w-4 h-4" />
-        </Link>
+        </a>
 
         <!-- Icon Profile -->
-        <Link
+        <a
           href="/profile"
           class="w-8 h-8 rounded-full bg-[#DBDDF580] flex items-center justify-center hover:opacity-70 transition"
         >
           <img src="/image/ic_profile.png" alt="Profile" class="w-4 h-4" />
-        </Link>
+        </a>
       </div>
 
       <!-- KANAN: Slogan -->
@@ -60,15 +60,15 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Link, router } from '@inertiajs/vue3';
 
+const searchQuery = ref('');
 
-  const searchQuery = ref('');
-
-// Handle form search
+// Handle search redirect
 const handleSearch = () => {
-  if (searchQuery.value.trim() !== '') {
-    router.visit(`/search?q=${encodeURIComponent(searchQuery.value)}`);
+  const query = searchQuery.value.trim();
+  if (query !== '') {
+    // Navigasi manual ke halaman pencarian
+    window.location.href = `/search?q=${encodeURIComponent(query)}`;
   }
 };
 </script>
